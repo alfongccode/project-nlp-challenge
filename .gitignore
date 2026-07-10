@@ -1,0 +1,4 @@
+__pycache__
+/deberta_fakenews/*
+/deberta_finetuned_model/*
+/tmp_predict/*
