@@ -1,39 +1,67 @@
-![logo_ironhack_blue 7](https://user-images.githubusercontent.com/23629340/40541063-a07a0a8a-601a-11e8-91b5-2f13e4e6b441.png)
+### Reptilian Fact Checker
+## About
+- Reptilian fact checker is a fake news locator.
+## Usage and Examples
+- APP on HuggingFace Space -> [AI_ventura](https://huggingface.co/spaces/Bitnick42/reptilian-fact-checker)
 
-# PROJECT | Natural Language Processing Challenge
+## Problem statement
+* **Task**: NLP news classificator (2 classes)
+* **Goal**: Given a corpus of an article gets if is fake or real
+* **Approach**: Fine-tune a pretrained MobileNetV2 backbone (ImageNet weights) with a custom classification head, using data augmentation and class weighting to handle class imbalance
 
-## Introduction
+## Dataset
+- **Source:** data.csv
+- **Columns (5):** label, title, text, subject, date
+- **Size:** 36,083 registers total (after removing 3,859 repeated articles)
+- **Split:** 80% train / 20% test
+  - Train: 28,867 articles
+  - Test: 7,216 articles
+- **Class balance:** Balanced
+- **License:** [GPL2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 
-Learning how to process text is a skill required for Data Scientists/AI Engineers. 
+## Model architecture
 
-In this project, you will put these skills into practice to identify whether a news headline is real or fake news.
+- **Optimizer:** Adam (learning_rate: 0.001)
+- **Loss:** Sparse categorical crossentropy
+- **Callbacks:** EarlyStopping (patience 5), ReduceLROnPlateau (factor 0.5, patience 2)
 
-## Project Overview
+Results – accuracy/loss metrics, confusion matrix, sample outputs
+## Setup & installation
 
-In the file `dataset/data.csv`, you will find a dataset containing news articles with the following columns:
+| Dependency | Version |
+| :--- | :---: |
+| keras | ^3.15.0 |
+| matplotlib | ^3.10.6 |
+| tensorflow | ^2.21.0 |
+| numpy | ^2.4.4 |
+| pillow | ^12.1.1 |
 
-- **`label`**: 0 if the news is fake, 1 if the news is real.
-- **`title`**: The headline of the news article.
-- **`text`**: The full content of the article.
-- **`subject`**: The category or topic of the news.
-- **`date`**: The publication date of the article.
+- **Download repository**: `git clone https://github.com/alfongccode/project-1-brief-CNN.git`
+- **Environment setup**:
+    - Run model_2.ipynb notebook
 
-Your goal is to build a classifier that is able to distinguish between the two.
+## Project structure
 
-Once you have a classifier built, then use it to predict the labels for `dataset/validation_data.csv`. Generate a new file
-where the label `2` has been replaced by `0` (fake) or `1` (real) according to your model. Please respect the original file format, 
-do not include extra columns, and respect the column separator. 
+```
+├── dataset
+|   ├──data.csv
+|   └── validation_data.csv
+├── main.ipynb
+├── model.ipynb
+├── model_2.ipynb
+├── requirements.txt
+├── preprocessing.py
+└── README.md
+``` 
 
-Please ensure to split the `data.csv` into **training** and **test** datasets before using it for model training or evaluation.
+## Tech stack
+- **Language:** Python 3.13
+- **Deep Learning:** TensorFlow / Keras (MobileNetV2 pretrained on ImageNet)
+- **Data processing:** NumPy, Pillow (PIL)
+- **Machine Learning utilities:** scikit-learn (train/test split, class weights, metrics)
+- **Visualization:** Matplotlib
+- **Environment:** Jupyter Notebook 
 
-## Guidance
-
-Like in a real life scenario, you are able to make your own choices and text treatment.
-Use the techniques you have learned and the common packages to process this data and classify the text.
-
-## Deliverables
-
-1. **Python Code:** Provide well-documented Python code that conducts the analysis.
-2. **Predictions:** A csv file in the same format as `validation_data.csv` but with the predicted labels (0 or 1)
-3. **Accuracy estimation:** Provide the teacher with your estimation of how your model will perform.
-4. **Presentation:** You will present your model in a 10-minute presentation. Your teacher will provide further instructions.
+## Authors
+  - **Nicolas Mooney** - [https://github.com/NIKK014](https://github.com/NIKK014)
+  - **Alfonso García Cortijo** - [https://github.com/alfongccode](https://github.com/alfongccode)
